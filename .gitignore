@@ -1,0 +1,9 @@
+.dockerignore
+.venv/
+data/
+__pycache__/
+*.pyc
+models/
+Dockerfile
+Dockerfile.*
+

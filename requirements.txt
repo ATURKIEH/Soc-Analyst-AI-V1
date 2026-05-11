@@ -1,0 +1,13 @@
+tensorflow
+scikit-learn
+pandas
+numpy
+langchain
+langchain-community
+ollama
+fastapi
+uvicorn
+streamlit
+plotly
+python-multipart
+joblib
