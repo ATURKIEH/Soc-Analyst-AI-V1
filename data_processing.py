@@ -10,9 +10,7 @@ class DataProcessing:
     def __init__(self):
         pass
 
-    def load_and_process(self) -> np.ndarray:
-        df1 = pd.read_csv(os.path.join('data', 'KDDTrain+.txt'))
-        df2 = pd.read_csv(os.path.join('data', 'KDDTest+.txt'))
+    def load_and_process(self, df1, df2) -> np.ndarray:
 
         columns = [
             'duration', 'protocol_type', 'service', 'flag',
