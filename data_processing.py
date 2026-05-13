@@ -10,7 +10,15 @@ class DataProcessing:
     def __init__(self):
         pass
 
-    def load_and_process(self, df1, df2) -> np.ndarray:
+    def load_and_process(self, df1: np.ndarray, df2: np.ndarray) -> np.ndarray:
+        '''
+            Function that takes in the Datasets, both Train and test Datasets, adds the column names,
+            removes a column, scales and encodes(part of it) the dataset and returns the split
+            Arguments:
+                df1: np.ndarray (m,) m examples (Pandas dataset csv)
+                df2: np.ndarray (m,) m examples (Pandas dataset csv)
+        
+        '''
 
         columns = [
             'duration', 'protocol_type', 'service', 'flag',
@@ -108,6 +116,14 @@ class DataProcessing:
 
     def get_normal_traffic(self, X_train_scaled: np.ndarray, 
                         y_train: pd.Series) -> np.ndarray:
+        
+        '''
+            Takes in scaled X_train numpy array dataset, and their values,
+            Function aims to return the examples of the dataset where they are normal(not anomalies) in order to train the model with only normal examples
+            Arguments:
+                X_train_scaled: np.ndarray (m,) m examples
+                y_train: np.Series (m,) m rows
+        '''
         mask = y_train.values == 'normal'
         return X_train_scaled[mask]
     
