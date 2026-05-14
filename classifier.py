@@ -4,6 +4,7 @@ import tensorflow as tf
 from tensorflow.keras import layers
 from sklearn.preprocessing import LabelEncoder
 import sklearn
+import numpy as np
 
 
 class Classifier:
@@ -22,7 +23,7 @@ class Classifier:
 
         ])
 
-        model.compile(optimizer = 'adam', loss = 'sparse_categorical_entropy', metrics= ['accuracy'])
+        model.compile(optimizer = 'adam', loss = 'sparse_categorical_crossentropy', metrics= ['accuracy'])
 
         return model
     
@@ -36,8 +37,14 @@ class Classifier:
         callbacks = [
             tf.keras.callbacks.EarlyStopping(monitor = 'val_loss', patience = 5, restore_best_weights=True)
         ]
-        class_weight = sklearn.utils.class_weight.compute_class_weight()
-        history = model.fit(X_train_ae, y_train_ae, validation_data = (X_val_ae, y_val_ae), epochs = 100, batch_size = 32, callbacks = callbacks, class_weight = class_weight)
+        classes = np.unique(y_train_ae)
+        weights = sklearn.utils.class_weight.compute_class_weight(
+            class_weight='balanced',
+            classes=classes,
+            y=y_train_ae
+        )
+        class_weight_dict = dict(zip(classes, weights))
+        history = model.fit(X_train_ae, y_train_ae, validation_data = (X_val_ae, y_val_ae), epochs = 100, batch_size = 32, callbacks = callbacks, class_weight = class_weight_dict)
 
         return history, label_encoder
     

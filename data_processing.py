@@ -10,7 +10,7 @@ class DataProcessing:
     def __init__(self):
         pass
 
-    def load_and_process(self, df1: np.ndarray, df2: np.ndarray) -> np.ndarray:
+    def load_and_process(self) -> np.ndarray:
         '''
             Function that takes in the Datasets, both Train and test Datasets, adds the column names,
             removes a column, scales and encodes(part of it) the dataset and returns the split
@@ -19,6 +19,8 @@ class DataProcessing:
                 df2: np.ndarray (m,) m examples (Pandas dataset csv)
         
         '''
+        df1 = pd.read_csv(os.path.join('data', 'KDDTrain+.txt'))
+        df2 = pd.read_csv(os.path.join('data', 'KDDTest+.txt'))
 
         columns = [
             'duration', 'protocol_type', 'service', 'flag',

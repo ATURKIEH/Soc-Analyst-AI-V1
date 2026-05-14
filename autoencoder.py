@@ -6,7 +6,7 @@ class AutoEncoder:
     def __init__(self):
         pass
 
-    def build_encoder(self, input_dim):
+    def build_encoder(self, input_dim: int):
 
         model = tf.keras.Sequential([
             layers.Input(shape = (input_dim,)),
@@ -23,7 +23,7 @@ class AutoEncoder:
 
         return model
     
-    def train(self, model, X_normal):
+    def train(self, model, X_normal: np.ndarray):
         X_train_ae, X_val_ae = train_test_split(X_normal, test_size=0.2, random_state=42)
 
         callbacks = [
