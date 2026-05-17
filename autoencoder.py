@@ -27,10 +27,10 @@ class AutoEncoder:
         X_train_ae, X_val_ae = train_test_split(X_normal, test_size=0.2, random_state=42)
 
         callbacks = [
-            tf.keras.callbacks.EarlyStopping(monitor = 'val_loss', patience = 5, restore_best_weights=True)
+            tf.keras.callbacks.EarlyStopping(monitor = 'val_loss', patience = 10, restore_best_weights=True)
         ]
 
-        history = model.fit(X_train_ae, X_train_ae, validation_data = (X_val_ae, X_val_ae), epochs = 100, batch_size = 32, callbacks = callbacks)
+        history = model.fit(X_train_ae, X_train_ae, validation_data = (X_val_ae, X_val_ae), epochs = 200, batch_size = 32, callbacks = callbacks)
 
         return history, X_val_ae
     
@@ -38,7 +38,7 @@ class AutoEncoder:
         reconstructed = model.predict(X_val_ae)
         errors = np.mean(np.square(X_val_ae - reconstructed), axis=1)
 
-        threshold = np.percentile(errors, 95)
+        threshold = np.percentile(errors, 99)
         return threshold
     
     def detect_anomalies(self, model, X, threshold):
