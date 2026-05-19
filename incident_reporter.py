@@ -2,6 +2,13 @@ from langchain.chat_models import init_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 
 class IncidentReporter:
+    _instance = None
+    
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(IncidentReporter, cls).__new__(cls)
+        return cls._instance
+    
     def __init__(self):
         self.model = init_chat_model(model = 'llama3.2:1b', model_provider= 'ollama', temperature = 0.3)
         self.prompt_template = ChatPromptTemplate.from_messages([

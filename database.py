@@ -1,6 +1,12 @@
 import sqlite3
 
 class Database:
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(Database, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
         self.conn = sqlite3.connect('incidents.db', check_same_thread=False)
         self.create_table()

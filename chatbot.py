@@ -8,6 +8,11 @@ import sqlite3
 
 
 class SOCChatBot:
+    _instance = None
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super(SOCChatBot, cls).__new__(cls)
+        return cls._instance
     def __init__(self, db_path: str = 'incidents.db'):
         self.db_path = db_path
         self.llm     = ChatOllama(model='llama3.2:1b', temperature=0)

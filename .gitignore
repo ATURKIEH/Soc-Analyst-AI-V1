@@ -1,9 +1,21 @@
-.dockerignore
+# Virtual environment
 .venv/
-data/
+venv/
+env/
+
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
 models/
-Dockerfile
-Dockerfile.*
+data/
+incidents.db
+.env
+.vscode/
+.idea/
+.dockerignore
 
+.DS_Store
+Thumbs.db
+*.log

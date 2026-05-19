@@ -11,3 +11,5 @@ streamlit
 plotly
 python-multipart
 joblib
+langchain_ollama
+imbalanced-learn
